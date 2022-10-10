@@ -33,9 +33,9 @@ export function iniValuesPot() {
 }
 
 export function iniGuiPot(gui) {
-	let sliderW = gui.add(objPot, "barrierWidth").min(0).max(50).step(1); 
-	let sliderE = gui.add(objPot, "barrierEnergy").min(0).max(0.2).step(0.01);
-	gui.add(objPot, "waveEnergy").min(0).max(0.2).step(0.01);
+	let sliderW = gui.add(objPot, "barrierWidth").min(0).max(50).step(1).name("Barrier Width (m)"); 
+	let sliderE = gui.add(objPot, "barrierEnergy").min(0).max(0.2).step(0.01).name("Barrier Energy (J)");
+	gui.add(objPot, "waveEnergy").min(0).max(0.2).step(0.01).name("Barrier Energy (J)");
 	gui.add(objPot, "speed").min(0).max(100).step(1);
 	gui.add(objPot, "probability");
 	gui.open();
@@ -49,8 +49,8 @@ export function iniGuiPot(gui) {
 }
 
 function iniValues(canv) {
-	canv.width = window.innerWidth
-	canv.height = window.innerHeight
+	canv.width = window.innerWidth;
+	canv.height = window.innerHeight;
 	canv.id = 'canvasId';
 	document.body.appendChild(canv); // adds the canvas to the body element
 	context = canv.getContext('2d');
@@ -72,6 +72,9 @@ function iniValues(canv) {
 export function waveFunctionPot(canv, timeouts) {
 	let popup = document.getElementById("myPopupEnergy");
   	popup.textContent = 'You can set the energy of the wave function and the barrier above!';
+  	
+  	let popupText = document.getElementById("myPopupInfo");
+  	popupText.textContent = "The potential barrier is a standard one-dimensional problem that demonstrates the phenomena of quantum tunneling and wave-mechanical reflection.";
   	renderMathInElement(popup);
 	window.clearTimeout(timeouts[0]);
 	iniValues(canv);
@@ -102,15 +105,29 @@ function next(canv, timeouts) {
 }
 
 function nextValue() {
+	let max = 0;
+	let maxi = -1;
 	for (let i = 1; i < xMax*3; ++i) {
 		psiNextReal[i] = psiPrevReal[i]+dt*(-psiIm[i+1]-psiIm[i-1]+2*(1+p[i])*psiIm[i]);
 		psiNextIm[i] = psiPrevIm[i]-dt*(-psiReal[i+1]-psiReal[i-1]+2*(1+p[i])*psiReal[i]);
+		if (psiNextReal[i] > max) {
+			max = psiNextReal[i];
+			maxi = i;
+		}
 	}
 	for (let i = 1; i < xMax*3; ++i) {
-		psiPrevReal[i] = psiReal[i];
-		psiPrevIm[i] = psiIm[i];
-		psiReal[i] = psiNextReal[i];
-		psiIm[i] = psiNextIm[i];
+		if (maxi < xMax/10 || maxi > xMax*(29/10)) {
+			psiPrevReal[i] = 0;
+			psiPrevIm[i] = 0;
+			psiReal[i] = 0;
+			psiIm[i] = 0;
+		}
+		else {
+			psiPrevReal[i] = psiReal[i];
+			psiPrevIm[i] = psiIm[i];
+			psiReal[i] = psiNextReal[i];
+			psiIm[i] = psiNextIm[i];
+		}
 	}
 }
 

@@ -4,8 +4,9 @@ import * as dat from '../node_modules/dat.gui/build/dat.gui.module.js';
 
 let segments = 200;
 
-let planck = 6.62607015e-34;
+let planck = 1.054571817e-34;
 let alpha = 3;
+let jtoev = 6.2415093433e+18;
 
 var objHarm = {
 	nx: 0,
@@ -165,8 +166,17 @@ function computeEnergy() {
 
 	let energyTotal = energyy+energyx;
 	let energyTotalPrec = energyTotal.toPrecision(3);
-	let sum = energyTotalPrec + ' J = '+energyxPrec+' + '+energyyPrec;
+
+	let energyTotalEV = energyTotal*jtoev;
+	let energyTotalEVPrec = energyTotalEV.toPrecision(3);
+
+	let sum = energyTotalPrec + ' J = '+energyxPrec+' + '+energyyPrec + ' = ' + energyTotalEVPrec + ' eV';
 
 	popup.textContent = '$$E_n = (n + {1 \\over 2})\\hbar\\omega$$ $$\\omega = 2\\pi frequency$$ $$E_{total} = E_{nx} + E_{ny}$$'+sum;
+	
 	renderMathInElement(popup);
+
+	let popupText = document.getElementById("myPopupInfo");
+	popupText.textContent = "The quantum harmonic oscillator is the quantum-mechanical analog of the classical harmonic oscillator, a system that, when displaced from its equilibrium position, experiences a restoring force F proportional to the displacement x. For the computations of the energy, we assumed a frequency of 100 Hz."
+
 }

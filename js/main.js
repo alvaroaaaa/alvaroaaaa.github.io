@@ -45,7 +45,6 @@ function onWindowResize() {
 	camera.updateProjectionMatrix();
 
 	renderer.setSize( window.innerWidth, window.innerHeight );
-	//labelRenderer.setSize( window.innerWidth, window.innerHeight );
 }
 
 let scene = new THREE.Scene();
@@ -56,8 +55,6 @@ let mesh = [undefined];
 let timeouts = [undefined];
 
 let gui = new dat.GUI();
-//let customContainer = document.getElementById('my-gui-container');
-//customContainer.appendChild(gui.domElement);
 
 let refreshInf = {
 	setCameraAuto: function() {setCameraAutoInf(controls, camera)},
@@ -94,11 +91,6 @@ renderer.id = 'rendererId';
 renderer.autoClear = false;
 document.body.appendChild( renderer.domElement );
 
-//const axesHelper = new THREE.AxesHelper( 6 );
-//scene.add( axesHelper );
-
-//scene.add(line);
-
 renderer.setClearColor( 0x8888, 1 );
 
 let controls = new OrbitControls( camera, renderer.domElement );
@@ -111,10 +103,8 @@ function animate() {
 	controls.update();
 	renderer.clear();
 	renderer.render( scene, camera );
-	//labelRenderer.render( scene, camera );
 	renderer.clearDepth();
 	if (axisB.Show_Axis) renderer.render( sceneAxis, camera );
-	//labelRenderer.render( scene, camera );
 };
 
 function iniInfiniteWell() {
@@ -137,8 +127,8 @@ function iniInfiniteWell() {
 	waveFunctionInf(scene, mesh);
 	setCameraAutoInf(controls, camera);
 	gui.add(refreshInf, 'refresh');
-	gui.add(refreshInf, 'setCameraAuto');
-	gui.add(axisB, 'Show_Axis');
+	gui.add(refreshInf, 'setCameraAuto').name('set camera auto');
+	gui.add(axisB, 'Show_Axis').name('show Axis');
 }
 
 function iniHarmonicOscillator() {
@@ -161,8 +151,8 @@ function iniHarmonicOscillator() {
 	waveFunctionHarm(scene, mesh);
 	setCameraAutoHarm(controls, camera)
 	gui.add(refreshHarm, 'refresh');
-	gui.add(refreshHarm, 'setCameraAuto');
-	gui.add(axisB, 'Show_Axis');
+	gui.add(refreshInf, 'setCameraAuto').name('set camera auto');
+	gui.add(axisB, 'Show_Axis').name('show Axis');
 }
 
 function iniHydrogenAtom() {
@@ -182,8 +172,8 @@ function iniHydrogenAtom() {
 	waveFunctionHydr(scene, mesh, sceneAxis);
 	setCameraAutoHydr(controls, camera);
 	gui.add(refreshHydr, 'refresh');
-	gui.add(refreshHydr, 'setCameraAuto');
-	gui.add(axisB, 'Show_Axis');
+	gui.add(refreshInf, 'setCameraAuto').name('set camera auto');
+	gui.add(axisB, 'Show_Axis').name('show Axis');
 }
 
 function iniPotentialBarrier() {
@@ -200,15 +190,14 @@ function iniPotentialBarrier() {
 	iniValuesPot();
 	iniGuiPot(folderParameters);
 	waveFunctionPot(canv, timeouts);
-	gui.add(refreshPot, 'refresh'); 
-	gui.add(axisB, 'Show_Axis');
+	gui.add(refreshPot, 'refresh');
 }
 
 function addModels(folder) {
-	folder.add(modelFunctions, 'Infinite_Well');
-	folder.add(modelFunctions, 'Harmonic_Oscillator');
-	folder.add(modelFunctions, 'Hydrogen_Atom')
-	folder.add(modelFunctions, 'Potential_Barrier');
+	folder.add(modelFunctions, 'Infinite_Well').name('Infinite Well');
+	folder.add(modelFunctions, 'Harmonic_Oscillator').name('Harmonic Oscillator');
+	folder.add(modelFunctions, 'Hydrogen_Atom').name('Hydrogen Atom');
+	folder.add(modelFunctions, 'Potential_Barrier').name('Potential Barrier');
 	folder.open();
 }
 

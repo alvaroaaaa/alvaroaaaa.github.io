@@ -3,10 +3,11 @@ import { TDSLoader } from '../node_modules/three/examples/jsm/loaders/TDSLoader.
 
 import {axis} from './axis.js'
 
-let electronM = 9.109383701528e-37;
-let planck = 6.62607015e-34;
+let electronM = 9.109383701528e-31;
+let planck = 1.054571817e-34;
 let electronC = -1.602176634e-19;
 let vacuum = 8.854187812813e-12;
+let jtoev = 6.2415093433e+18;
 
 let objHydr = {
   n:  1,
@@ -229,8 +230,11 @@ export function waveFunctionHydr(scene, mesh, sceneAxis) {
 
 function computeEnergy() {
   let popup = document.getElementById("myPopupEnergy");
-  let energy = -((electronM*Math.pow(electronC,4))/(2*4*Math.PI*vacuum*planck*planck))*(1/objHydr.n)
-  let energyString = "$$E_n = "+energy.toPrecision(3)+"\\:J$$"
-  popup.textContent = '$$E_n = -({m_ee^{4}\\over 2(4\\pi\\varepsilon_0)\\hbar^{2}})({1 \\over n^{2}})$$ $$m_e = electron\\: mass$$ $$e = electron\\: charge$$ $$\\varepsilon_0 = vacuum\\: permittivity$$'+energyString;
+  let energy = -((electronM*Math.pow(electronC,4))/(2*4*Math.PI*vacuum*4*Math.PI*vacuum*planck*planck))*(1/objHydr.n)
+  let energyString = "$$E_n = "+energy.toPrecision(3)+"\\:J = $$"
+  popup.textContent = '$$E_n = -({m_ee^{4}\\over 2(4\\pi\\varepsilon_0)\\hbar^{2}})({1 \\over n^{2}})$$ $$m_e = electron\\: mass$$ $$e = electron\\: charge$$ $$\\varepsilon_0 = vacuum\\: permittivity$$'+energyString+(energy*jtoev).toPrecision(4)+' eV';
   renderMathInElement(popup);
+
+  let popupText = document.getElementById("myPopupInfo");
+  popupText.textContent = "A hydrogen atom is an atom of the chemical element hydrogen. The electrically neutral atom contains a single positively charged proton and a single negatively charged electron bound to the nucleus by the Coulomb force.";
 }

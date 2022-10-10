@@ -3,8 +3,9 @@ import { ParametricGeometry } from '../node_modules/three/examples/jsm/geometrie
 import * as dat from '../node_modules/dat.gui/build/dat.gui.module.js';
 
 let segments = 200;
-let electronM = 9.109383701528e-37;
-let planck = 6.62607015e-34;
+let electronM = 9.109383701528e-31;
+let planck = 1.054571817e-34;
+let jtoev = 6.2415093433e+18;
 
 let objInf = {
 	L:  3,
@@ -23,7 +24,7 @@ export function iniValuesInf () {
 export function iniGuiInf(gui) {
 	gui.add(objInf, "nx").min(1).max(5).step(1);
 	gui.add(objInf, "ny").min(1).max(5).step(1);
-	gui.add(objInf, "L").min(1).max(5).step(0.25);
+	gui.add(objInf, "L").min(1).max(5).step(0.25).name('L (m)');
 	gui.add(objInf, "probability");
 	gui.open();
 }
@@ -139,9 +140,14 @@ function computeEnergy() {
 	let energyy = (objInf.ny*objInf.ny*Math.PI*Math.PI*planck*planck)/(2*electronM*objInf.L*objInf.L);
 	let energyyPrec = energyy.toPrecision(3);
 	let energyTotal = energyy+energyx;
+	let energyTotalEV = energyTotal*jtoev;
 	let energyTotalPrec = energyTotal.toPrecision(3);
-	let sum = energyTotalPrec + ' J = '+energyxPrec+' + '+energyyPrec;
+	let energyTotalEVPrec = energyTotalEV.toPrecision(3);
+	let sum = energyTotalPrec + ' J = '+energyxPrec+' + '+energyyPrec + ' = ' + energyTotalEVPrec + ' eV';
 	console.log(popup)
 	popup.textContent = '$$E_n = {n^{2}\\pi^{2}\\hbar^{2} \\over 2mL^{2}}$$ $$E_{total} = E_{nx} + E_{ny}$$'+sum;
 	renderMathInElement(popup);
+
+	let popupText = document.getElementById("myPopupInfo");
+	popupText.textContent = "The infinite well model describes a particle free to move in a small space surrounded by impenetrable barriers. For the computations, we assumed the particle is an electron."
 }

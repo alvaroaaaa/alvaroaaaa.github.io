@@ -2,8 +2,6 @@ import * as THREE from "../node_modules/three/build/three.module.js"
 import { ParametricGeometry } from '../node_modules/three/examples/jsm/geometries/ParametricGeometry.js'
 import * as dat from '../node_modules/dat.gui/build/dat.gui.module.js';
 
-import "../node_modules/mykatex/katex.js";
-
 let segments = 200;
 let electronM = 9.109383701528e-37;
 let planck = 6.62607015e-34;

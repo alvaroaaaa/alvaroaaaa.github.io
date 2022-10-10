@@ -151,7 +151,7 @@ function iniHarmonicOscillator() {
 	waveFunctionHarm(scene, mesh);
 	setCameraAutoHarm(controls, camera)
 	gui.add(refreshHarm, 'refresh');
-	gui.add(refreshInf, 'setCameraAuto').name('set camera auto');
+	gui.add(refreshHarm, 'setCameraAuto').name('set camera auto');
 	gui.add(axisB, 'Show_Axis').name('show Axis');
 }
 
@@ -172,7 +172,7 @@ function iniHydrogenAtom() {
 	waveFunctionHydr(scene, mesh, sceneAxis);
 	setCameraAutoHydr(controls, camera);
 	gui.add(refreshHydr, 'refresh');
-	gui.add(refreshInf, 'setCameraAuto').name('set camera auto');
+	gui.add(refreshHydr, 'setCameraAuto').name('set camera auto');
 	gui.add(axisB, 'Show_Axis').name('show Axis');
 }
 

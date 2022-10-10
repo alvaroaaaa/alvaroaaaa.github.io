@@ -5,7 +5,7 @@ import {axis} from './axis.js'
 
 let electronM = 9.109383701528e-31;
 let planck = 1.054571817e-34;
-let electronC = -1.602176634e-19;
+let electronC = 1.602176634e-19;
 let vacuum = 8.854187812813e-12;
 let jtoev = 6.2415093433e+18;
 

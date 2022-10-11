@@ -158,13 +158,12 @@ function paintCanvas(canv) {
 			context.strokeStyle = "hsl(0,0%,"+l+"%)";
 			context.beginPath();
 			context.moveTo(i, 0);
-			context.lineTo(i, canv.height);		// not optimized
+			context.lineTo(i, canv.height);
 			context.stroke();
 		}
 	}
 
 	let baselineY, pxPerY;
-	let delta = 20;
 
 	if (!objPot.probability) {
 		baselineY = yMax*0.5;
@@ -179,7 +178,6 @@ function paintCanvas(canv) {
 
 		context.lineWidth = 2;
 
-		// Plot the real part of psi:
 		context.beginPath();
 		context.moveTo(0, baselineY - psiReal[xMax]*pxPerY);
 		for (let i=1; i<=xMax; i++) {
@@ -188,7 +186,6 @@ function paintCanvas(canv) {
 		context.strokeStyle = "#ffc000";
 		context.stroke();
 
-		// Plot the imaginary part of psi:
 		context.beginPath();
 		context.moveTo(0, baselineY - psiIm[xMax]*pxPerY);
 		for (let i=1; i<=xMax; i++) {

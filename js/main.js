@@ -58,17 +58,17 @@ let gui = new dat.GUI();
 
 let refreshInf = {
 	setCameraAuto: function() {setCameraAutoInf(controls, camera)},
-	refresh: function() {waveFunctionInf(scene, mesh); }
+	refresh: function() {waveFunctionInf(scene, mesh);setCameraAutoInf(controls, camera);}
 }
 
 let refreshHarm = {
 	setCameraAuto: function() {setCameraAutoHarm(controls, camera)},
-	refresh: function() {waveFunctionHarm(scene, mesh); }
+	refresh: function() {waveFunctionHarm(scene, mesh);setCameraAutoHarm(controls, camera);}
 }
 
 let refreshHydr = {
 	setCameraAuto: function() {setCameraAutoHydr(controls, camera)},
-	refresh: function() {waveFunctionHydr(scene, mesh, sceneAxis); }
+	refresh: function() {waveFunctionHydr(scene, mesh, sceneAxis);setCameraAutoHydr(controls, camera);}
 }
 
 let refreshPot = {

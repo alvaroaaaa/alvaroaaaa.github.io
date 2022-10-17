@@ -74,7 +74,7 @@ export function waveFunctionPot(canv, timeouts) {
   	popup.textContent = 'You can set the energy of the wave function and the barrier above!';
   	
   	let popupText = document.getElementById("myPopupInfo");
-  	popupText.textContent = "The potential barrier is a standard one-dimensional problem that demonstrates the phenomena of quantum tunneling and wave-mechanical reflection.";
+  	popupText.textContent = "The potential barrier is a standard one-dimensional problem that demonstrates the phenomena of quantum tunneling and wave-mechanical reflection. The yellow wave corresponds to the real part of the wave function. The other one to the imaginary part.";
   	renderMathInElement(popup);
 	window.clearTimeout(timeouts[0]);
 	iniValues(canv);

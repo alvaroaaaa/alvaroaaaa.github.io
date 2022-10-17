@@ -77,11 +77,13 @@ export function iniGuiHydr(gui) {
 
   sliderL.onChange(function(value) {
     gui.__controllers[2].min(-objHydr.l).max(objHydr.l).updateDisplay();
+    gui.__controllers[2].setValue(0).updateDisplay();
   });
   sliderN.onChange(function(value) {
     if (objHydr.n <= objHydr.l) {
       gui.__controllers[1].setValue(0);
       gui.__controllers[1].max(objHydr.n-1).updateDisplay();
+      gui.__controllers[2].min(-objHydr.l).max(objHydr.l).updateDisplay();
       gui.__controllers[2].setValue(0).updateDisplay();
       gui.__controllers[2].min(0).max(0).updateDisplay();
     }

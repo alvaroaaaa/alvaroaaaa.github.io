@@ -35,7 +35,7 @@ export function iniValuesPot() {
 export function iniGuiPot(gui) {
 	let sliderW = gui.add(objPot, "barrierWidth").min(0).max(50).step(1).name("Barrier Width (m)"); 
 	let sliderE = gui.add(objPot, "barrierEnergy").min(0).max(0.2).step(0.01).name("Barrier Energy (J)");
-	gui.add(objPot, "waveEnergy").min(0).max(0.2).step(0.01).name("Barrier Energy (J)");
+	gui.add(objPot, "waveEnergy").min(0).max(0.2).step(0.01).name("Wave Energy (J)");
 	gui.add(objPot, "speed").min(0).max(100).step(1);
 	gui.add(objPot, "probability");
 	gui.open();
